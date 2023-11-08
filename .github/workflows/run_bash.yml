@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: show dir
-        run: pwd
       - name: show file
-        run: ls -la
+        run: |
+          pwd
+          ls -la
+          cd ../
+          ls -la
       - name: just-run
         run: sh run.sh
