@@ -10,6 +10,6 @@ jobs:
       - name: show dir
         run: pwd
       - name: show file
-        run: ls -las
+        run: ls -la
       - name: just-run
         run: sh run.sh
