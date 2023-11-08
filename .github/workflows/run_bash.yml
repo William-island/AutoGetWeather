@@ -8,11 +8,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2 
-      - name: show file
-        run: |
-          pwd
-          ls -la
-          cd ../
-          ls -la
       - name: just-run
         run: sh run.sh
