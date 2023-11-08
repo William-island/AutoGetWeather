@@ -9,5 +9,7 @@ jobs:
     steps:
       - name: show dir
         run: pwd
+      - name: show file
+        run: ls
       - name: just-run
         run: sh run.sh
