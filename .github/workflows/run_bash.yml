@@ -7,6 +7,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
       - name: just-run
         run: sh run.sh
+
+      - name: Commit
+        run: |
+          git config --global user.email 18761099420@163.com
+          git config --global user.name William-island
+          git add .
+          git commit -m "change time log"
+          git pull --rebase
+
+      - name: Push changes
+        uses: ad-m/github-push-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
