@@ -1,7 +1,8 @@
 # github action to run bash
 name: run bash
 on:
-  push
+  schedule:
+    - cron: "0 15 * * *"
 jobs:
   run-bash:
     runs-on: ubuntu-latest
