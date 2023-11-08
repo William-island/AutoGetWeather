@@ -1,0 +1,11 @@
+# github action to run bash
+name: run bash
+on:
+  push
+jobs:
+  run-bash:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: just-run
+        run: sh run.sh
