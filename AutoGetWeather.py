@@ -30,7 +30,7 @@ def send_email(content):
 if __name__ == '__main__':
     # updata time in the repo
     with open('log.txt','w+') as f:
-        f.write(str(time.asctime( time.localtime(time.time()) )))
+        f.write('AutoWeather time log: '+ str(time.asctime( time.localtime(time.time()) )))
     
     # send email
     send_email('Test of AutoGetWeather')
