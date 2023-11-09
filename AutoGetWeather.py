@@ -17,7 +17,7 @@ def send_email(content):
     message = MIMEText(content, 'plain', 'utf-8')
     message['Subject'] = Header(subject, 'utf-8')
 
-    message['From'] = Header("William <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名 
+    message['From'] = Header("William_from_github <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名 
     message['To'] = Header("William")    #邮件接收者姓名
 
 
