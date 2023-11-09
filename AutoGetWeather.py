@@ -5,20 +5,19 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-# auto email to remind
-def send_email(remind):
+# auto email
+def send_email(content):
     mail_host = "smtp.qq.com"  # 填写邮箱服务器:这个是qq邮箱服务器，直接使用smtp.qq.com
     mail_pass = 'chlzwavkcodtbfge'  # 填写在qq邮箱设置中获取的授权码
     sender = '943649026@qq.com'  # 填写邮箱地址
     receivers = ['18761099420@163.com']  # 填写收件人的邮箱，QQ邮箱或者其他邮箱，可多个，中间用,隔开
 
     subject = 'AutoWeather'  #发送的主题
-    content= 'Test of AutoGetWeather'
         
     message = MIMEText(content, 'plain', 'utf-8')
     message['Subject'] = Header(subject, 'utf-8')
 
-    message['From'] = Header("William from github", 'utf-8')  #邮件发送者姓名
+    message['From'] = Header("William <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名 
     message['To'] = Header("William", 'utf-8')    #邮件接收者姓名
 
 
@@ -34,4 +33,4 @@ if __name__ == '__main__':
         f.write(str(time.asctime( time.localtime(time.time()) )))
     
     # send email
-    send_email()
+    send_email('Test of AutoGetWeather')

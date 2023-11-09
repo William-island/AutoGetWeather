@@ -1,7 +1,7 @@
 # github action to run bash
 name: run bash
 on:
-  push
+  push:
   # schedule:
   #   - cron: "0 15 * * *"
 jobs:
