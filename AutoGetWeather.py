@@ -18,7 +18,7 @@ def send_email(content):
     message['Subject'] = Header(subject, 'utf-8')
 
     message['From'] = Header("William <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名 
-    message['To'] = Header("William", 'utf-8')    #邮件接收者姓名
+    message['To'] = Header("William")    #邮件接收者姓名
 
 
     smtpObj = smtplib.SMTP_SSL(mail_host, 465) #建立smtp连接，qq邮箱必须用ssl边接，因此边接465端口
