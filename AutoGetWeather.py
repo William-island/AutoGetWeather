@@ -5,6 +5,12 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
+# define the function to get weather of nanjing, china
+def get_weather():
+    # define session
+    session = requests.Session()
+    
+
 # auto email
 def send_email(content):
     mail_host = "smtp.qq.com"  # 填写邮箱服务器:这个是qq邮箱服务器，直接使用smtp.qq.com
