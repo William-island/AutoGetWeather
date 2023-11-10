@@ -24,15 +24,15 @@ jobs:
       - name: just-run
         run: sh run.sh
 
-      # - name: Commit
-      #   run: |
-      #     git config --global user.email 18761099420@163.com
-      #     git config --global user.name William-island
-      #     git add .
-      #     git commit -m "change time log"
-      #     git pull --rebase
+      - name: Commit
+        run: |
+          git config --global user.email 18761099420@163.com
+          git config --global user.name William-island
+          git add .
+          git commit -m "change time log"
+          git pull --rebase
 
-      # - name: Push changes
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
