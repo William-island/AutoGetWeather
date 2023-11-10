@@ -3,13 +3,21 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
+import requests
+from bs4 import BeautifulSoup
 
 
 # define the function to get weather of nanjing, china
 def get_weather():
-    # define session
-    session = requests.Session()
-    
+    # city code
+    rul = 'http://www.weather.com.cn/weather/101190104.shtml'
+    r = requests.get(rul)
+    r.encoding = 'utf-8'
+    bs = BeautifulSoup(r.text, 'html.parser')
+    data_tommorrow = bs.find_all('li', class_='sky skyid lv3')[0]
+    date, weather, temperature, wind = data_tommorrow.text.split()
+    context = f'Date: {date}\nWeather: {weather}\nTemperature: {temperature}\nWind: {wind}'
+    return context
 
 # auto email
 def send_email(content):
@@ -37,6 +45,7 @@ if __name__ == '__main__':
     # updata time in the repo
     with open('log.txt','w+') as f:
         f.write('AutoWeather time log: '+ str(time.asctime( time.localtime(time.time()) )))
-    
+    # get weather
+    context = get_weather()
     # send email
-    send_email('Test of AutoGetWeather')
+    send_email(context)
