@@ -26,7 +26,7 @@ def get_weather():
     pressure_info = data_tommorrow.find('em', {'class': 'wea-info-pa'}).parent.text
 
     # organize context
-    content = f"Date Info: {date} {date_info}\nTomorrow's Weather: {tomorrow_weather}\nAVG Temperature: {temperature}\nAir Quality: {air_quality}\n\Wind Info: {wind_info}\nHumidity Info: {humidity_info}\nUV Info: {uv_info}\nPressure Info: {pressure_info}\n"
+    content = f"Date Info: {date} {date_info}\nTomorrow's Weather: {tomorrow_weather}\nAVG Temperature: {temperature}\nAir Quality: {air_quality}\nWind Info: {wind_info}\nHumidity Info: {humidity_info}\nUV Info: {uv_info}\nPressure Info: {pressure_info}\n"
     #print(context)
     return content
 
