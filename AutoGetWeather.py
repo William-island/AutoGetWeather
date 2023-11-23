@@ -27,7 +27,21 @@ def get_weather():
 
     # organize context
     content = f"Date Info: {date} {date_info}\nTomorrow's Weather: {tomorrow_weather}\nAVG Temperature: {temperature}\nAir Quality: {air_quality}\nWind Info: {wind_info}\nHumidity Info: {humidity_info}\nUV Info: {uv_info}\nPressure Info: {pressure_info}\n"
-    #print(context)
+    
+    # extra hint
+    content += " \n[REMIND]\n"
+    if int(temperature[:-1]) < 10:
+        content += "It's cold tomorrow, remember to wear more clothes.\n"
+    weather_condition = tomorrow_weather.split("\xa0")[1]
+    if weather_condition=='雨':
+        content += "It's rainy tomorrow, remember to take an umbrella.\n"
+    elif weather_condition=='晴':
+        content += "It's sunny tomorrow, remember to air your quilt.\n"
+    elif weather_condition=='阴':
+        content += "It's cloudy tomorrow, remember to take an umbrella.\n"
+    elif weather_condition=='雪':
+        content += "It's snowy tomorrow, remember to take an umbrella.\n"
+
     return content
 
 # auto email
@@ -35,7 +49,7 @@ def send_email(content):
     mail_host = "smtp.qq.com"  # 填写邮箱服务器:这个是qq邮箱服务器，直接使用smtp.qq.com
     mail_pass = 'chlzwavkcodtbfge'  # 填写在qq邮箱设置中获取的授权码
     sender = '943649026@qq.com'  # 填写邮箱地址
-    receivers = ['18761099420@163.com','1270142056@qq.com']  # 填写收件人的邮箱，QQ邮箱或者其他邮箱，可多个，中间用,隔开
+    receivers = ['18761099420@163.com']#,'1270142056@qq.com']  # 填写收件人的邮箱，QQ邮箱或者其他邮箱，可多个，中间用,隔开
 
     subject = 'AutoWeather'  #发送的主题
         
