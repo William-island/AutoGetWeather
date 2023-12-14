@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 
 # define the function get_weather
-# parm: weather url of location (default: nanjing, china)
+# parm: weather url of location
 def get_weather(url):
     # city code
     r = requests.get(url)
