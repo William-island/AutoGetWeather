@@ -7,10 +7,10 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# define the function to get weather of nanjing, china
-def get_weather():
+# define the function get_weather
+# parm: weather url of location
+def get_weather(url):
     # city code
-    url = 'https://tianqi.2345.com/jiangning2d/70447.htm'
     r = requests.get(url)
     r.encoding = 'utf-8'
     bs = BeautifulSoup(r.text, 'html.parser')
@@ -27,50 +27,54 @@ def get_weather():
 
     # organize context
     content = f"Date Info: {date} {date_info}\nTomorrow's Weather: {tomorrow_weather}\nAVG Temperature: {temperature}\nAir Quality: {air_quality}\nWind Info: {wind_info}\nHumidity Info: {humidity_info}\nUV Info: {uv_info}\nPressure Info: {pressure_info}\n"
-    
+
     # extra hint
     content += " \n[REMIND]\n"
     if int(temperature[:-1]) < 10:
         content += "It's cold tomorrow, remember to wear more clothes.\n"
     weather_condition = tomorrow_weather.split("\xa0")[1]
-    if weather_condition=='雨':
+    if weather_condition == '雨':
         content += "It's rainy tomorrow, remember to take an umbrella.\n"
-    elif weather_condition=='晴':
+    elif weather_condition == '晴':
         content += "It's sunny tomorrow, remember to air your quilt.\n"
-    elif weather_condition=='阴':
+    elif weather_condition == '阴':
         content += "It's cloudy tomorrow, remember to take an umbrella.\n"
-    elif weather_condition=='雪':
+    elif weather_condition == '雪':
         content += "It's snowy tomorrow, remember to take an umbrella.\n"
 
     return content
 
+
 # auto email
-def send_email(content):
+def send_email(content, receiver):
     mail_host = "smtp.qq.com"  # 填写邮箱服务器:这个是qq邮箱服务器，直接使用smtp.qq.com
     mail_pass = 'chlzwavkcodtbfge'  # 填写在qq邮箱设置中获取的授权码
     sender = '943649026@qq.com'  # 填写邮箱地址
-    receivers = ['18761099420@163.com','1270142056@qq.com']  # 填写收件人的邮箱，QQ邮箱或者其他邮箱，可多个，中间用,隔开
+    subject = 'AutoWeather'  # 发送的主题
 
-    subject = 'AutoWeather'  #发送的主题
-        
     message = MIMEText(content, 'plain', 'utf-8')
     message['Subject'] = Header(subject, 'utf-8')
 
-    message['From'] = Header("William_from_github <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名 
-    message['To'] = Header("Weather Info")    #邮件接收者姓名
+    message['From'] = Header("William_from_github <943649026@qq.com>")  # 'utf-8'  #邮件发送者姓名
+    message['To'] = Header("Weather Info")  # 邮件接收者姓名
 
-
-    smtpObj = smtplib.SMTP_SSL(mail_host, 465) #建立smtp连接，qq邮箱必须用ssl边接，因此边接465端口
-    smtpObj.login(sender, mail_pass)  #登陆
-    smtpObj.sendmail(sender, receivers, message.as_string())  #发送
+    smtpObj = smtplib.SMTP_SSL(mail_host, 465)  # 建立smtp连接，qq邮箱必须用ssl边接，因此边接465端口
+    smtpObj.login(sender, mail_pass)  # 登陆
+    smtpObj.sendmail(sender, receiver, message.as_string())  # 发送
     smtpObj.quit()
 
+def mail_weather(address):
+    for email,location in address.items():
+        send_email(get_weather(location), email)
 
 if __name__ == '__main__':
-    # get weather
-    context = get_weather()
-    # send email
-    send_email(context)
-    # updata time in the repo
-    with open('log.txt','w+') as f:
-        f.write('AutoWeather time log: '+ str(time.asctime( time.localtime(time.time()) )))
+
+    address = {}
+    address["18761099420@163.com"] = 'https://tianqi.2345.com/jiangning2d/70447.htm'
+    address["1270142056@qq.com"] = 'https://tianqi.2345.com/jiangning2d/70447.htm'
+    address["Lamron_Karl@outlook.com"] = 'https://tianqi.2345.com/longgang1d/72039.htm'
+
+    mail_weather(address)
+
+    with open('log.txt', 'w+') as f:
+        f.write('AutoWeather time log: ' + str(time.asctime(time.localtime(time.time()))))
